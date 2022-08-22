@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Details</title>    
+    <style>
+        butt1 {
+                background-color: #000;
+                border: .5px solid crimson;
+                border-radius: 10px;
+                color: #fff;
+                padding: 8px;
+                box-shadow: 0 0 30px 0 crimson,
+                            0 0 30px 0 crimson,
+                            0 0 10px 0 crimson inset;
+              }
+
+
+        butt2 {
+                background-color: #000;
+                border: .5px solid green;
+                border-radius: 10px;
+                color: #fff;
+                padding: 8px;
+                box-shadow: 0 0 30px 0 green,
+                            0 0 30px 0 lime,
+                            0 0 10px 0 green inset;
+              }
+
+
+        .button {
+          background-color: #04AA6D;
+          border: none;
+          color: white;
+          padding: 20px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 16px;
+          margin: 4px 2px;
+            box-shadow: 0 0 30px 0 green,
+                            0 0 30px 0 lime,
+                            0 0 10px 0 green inset;
+        }
+
+        .button1 {border-radius: 2px;}
+        .button2 {border-radius: 4px;}
+        .button3 {border-radius: 8px;}
+        .button4 {border-radius: 12px;}
+        .button5 {border-radius: 50%;}        
+
+    </style>
+{% extends "base.html" %}
+{% load static %}
+</head>
+
+
+<body>
+
+{% block page_content %}
+    <h1>Meachers Global</h1>
+    <h3>Container Unloading Details for Order ID: {{project.order_id}}</h3>
+    
+
+    <hr>
+    
+    <table>
+    <tr>
+        <th>Order ID: </th>
+        <td>{{project.order_id}}</td>
+    </tr>
+ 
+    <tr>
+        <th>Container No.: </th>
+        <td>{{project.container}}</td>
+    </tr>
+        
+    <tr>
+        <th>Container size: </th>
+        <td>{{project.size}}</td>
+    </tr>
+        
+    <tr>
+        <th>Product: </th>
+        <td>{{project.product}}</td>
+    </tr>
+        
+        
+    <tr>
+        <th>Packages: </th>
+        <td>{{project.packages}}</td>
+        <br/>
+        <th>SKUs per package: </th>
+        <td>{{project.sku}}</td>
+    </tr>
+        
+    <tr>
+        <th>Unloading Date: </th>
+        <td>{{project.date_work}}</td>
+        <br/>
+        <th>Start Time: </th>
+        <td>{{project.time_in}}</td>
+        <br/>
+        <th>Finish Time: </th>
+        <td>{{project.time_out}}</td>
+        <br/>
+        <th>Time taken: </th>
+        <td>{{tot_tim}} mins.</td>
+    </tr>
+
+        
+
+        
+    <tr>
+        <th>Total workers engaged:</th>
+        <td>{{men}}</td>
+    </tr>
+        
+        
+    <tr>
+        <th>Worker-1 Start: </th>
+        <td>{{project.w1_start}}</td>
+        <br/>
+        <th>Finish: </th>
+        <td>{{project.w1_stop}}</td>
+        <br/>
+        <th>Duration: </th>
+        <td>{{w1_t}}</td>
+    </tr>
+        
+    <tr>
+        <th>Worker-2 Start: </th>
+        <td>{{project.w2_start}}</td>
+        <br/>
+        <th>Finish: </th>
+        <td>{{project.w2_stop}}</td>
+        <br/>
+        <th>Duration: </th>
+        <td>{{w2_t}}</td>
+    </tr>
+        
+    <tr>
+        <th>Worker-3 Start: </th>
+        <td>{{project.w3_start}}</td>
+        <br/>
+        <th>Finish: </th>
+        <td>{{project.w3_stop}}</td>ge
+        <br/>
+        <th>Duration: </th>
+        <td>{{w3_t}}</td>
+    </tr>
+        
+    <tr>
+        <th>Worker-4 Start: </th>
+        <td>{{project.w5_start}}</td>
+        <br/>
+        <th>Finish: </th>
+        <td>{{project.w5_stop}}</td>
+        <br/>
+        <th>Duration: </th>
+        <td>{{w5_t}}</td>
+    </tr>
+        
+    <tr>
+        <th>Worker-5 Start: </th>
+        <td>{{project.w5_start}}</td>
+        <br/>
+        <th>Finish: </th>
+        <td>{{project.w5_stop}}</td>
+        <br/>
+        <th>Duration: </th>
+        <td>{{w5_t}}</td>
+    </tr>
+        
+        
+   
+    
+    </table>
+    
+
+{% endblock %}
+
+    
+</body>
+         
+</html>

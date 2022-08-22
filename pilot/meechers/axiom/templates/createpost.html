@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>Open Order Status </title>
+
+</head>
+
+<body>
+<h1>Initiate Container Ops </h1>
+<form action="" method="POST">
+{% csrf_token %}
+Order ID: <input type="text" name="order_id"/><br/><br/>
+    
+Container Number: 
+<textarea cols="20" rows="1" name="container"></textarea><br/><br/>
+
+Product Type:
+<textarea cols="20" rows="1" name="product"></textarea><br/><br/>
+
+Number of Packages:
+<textarea cols="20" rows="1" name="packages"></textarea><br/><br/>
+
+SKUs per package:
+<textarea cols="20" rows="1" name="sku"></textarea><br/><br/>
+
+Container size:
+  <input type="radio" id="40s" name="size" value="40">
+  <label for="40s">40</label>
+  <input type="radio" id="60s" name="size" value="60">
+  <label for="60s">60</label><br>
+<br/>
+
+Supervisor:
+<textarea cols="20" rows="1" name="supervisor"></textarea><br/><br/>
+
+Unloading Date: 
+<textarea cols="20" rows="1" name="date_work" >{% now "jS F Y" %} </textarea><br/><br/>
+    
+Unloading Start Time: 
+<input type="time" id="time_in" name="time_in"><br/><br/>
+
+Unloading Finish Time: 
+<input type="time" id="time_out" name="time_out"><br/><br/>
+
+<hr>
+Worker-1 Start: 
+<input type="time" id="w1_start" name="w1_start">
+Worker-1 Stop:
+<input type="time" id="w1_stop" name="w1_stop"><br/><br/>
+
+Worker-2 Start:
+<input type="time" id="w2_start" name="w2_start">    
+Worker-2 Stop:
+<input type="time" id="w2_stop" name="w2_stop"><br/><br/>    
+
+Worker-3 Start:
+<input type="time" id="w3_start" name="w3_start">
+Worker-3 Stop:
+<input type="time" id="w3_stop" name="w3_stop"><br/><br/>
+
+Worker-4 Start:
+<input type="time" id="w4_start" name="w4_start">
+Worker-4 Stop:
+<input type="time" id="w4_stop" name="w4_stop"><br/><br/>
+
+Worker-5 Start:
+<input type="time" id="w5_start" name="w5_start">
+Worker-5 Stop:
+<input type="time" id="w5_stop" name="w5_stop"><br/><br/>
+
+<input type="submit" value="Submit"/>
+</form>
+
+
+
+</body>
+
+</html>

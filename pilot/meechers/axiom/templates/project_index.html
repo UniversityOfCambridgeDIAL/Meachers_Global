@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+
+</head>
+
+
+<body>
+<center>
+<h1>Meachers Global</h1>
+
+<hr/>
+<center>
+<input type="text" id="searchtxt" placeholder="Search Order IDs" onkeyup="searchrecords()">
+<br/>
+<br/>
+<button onclick="location.href= '/export'">Generate Report (CSV)</button>
+<button onclick="location.href= '/createpost'" target="_blank">Initiate New Work</button>
+<button onclick="location.href= '/summary'" target="_blank">Summary</button>
+<hr/>
+
+<table border="1" id ="table1">
+  <tr>
+      <th>Record Timestamp</th>
+      <th>Order ID</th>
+      <th>Container</th>
+      <th>Work Details</th>
+      <th>Container-wise UT</th>
+      <th>Order-wise UT</th>
+      <th>Supervisor-wise UT</th>
+  </tr>
+
+{% for project in projects %}
+
+
+  <tr>
+    <td>{{project.timestamp}}</td>
+    <td>{{project.order_id}}</td>
+    <td>{{project.container}}</td>
+    <td><a href="{% url 'project_detail' project.id %}" class="btn btn-primary" target="_blank">Details</a></td>
+    <td><a href="/analysis" class="btn btn-primary" target="_blank">Container size</a></td>
+    <td><a href="/analysis2" class="btn btn-primary" target="_blank">Order-ID</a></td>
+    <td><a href="/analysis1" class="btn btn-primary" target="_blank">Supervisor</a></td>  
+</tr>
+
+{%endfor%}
+    
+</table>
+
+
+<script>
+function searchrecords() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("searchtxt");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("table1");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+</script>
+
+
+
+
+</body>
+         
+
+
+</html>
