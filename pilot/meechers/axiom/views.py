@@ -37,11 +37,13 @@ def project_detail(request, pk):
     context = {
         'project': project,
         'tot_tim':fin[2],
-        'w1_t':fin[3],
-        'w2_t':fin[4],
-        'w3_t':fin[5],
-        'w4_t':fin[6],
-        'w5_t':fin[7]
+        'w1_t':fin[4],
+        'w2_t':fin[5],
+        'w3_t':fin[6],
+        'w4_t':fin[7],
+        'w5_t':fin[8],
+         'men':fin[3],
+         'tw':fin[9]
 #        'buffer': buffer
     }
     return render(request, 'project_detail.html', context)
@@ -104,8 +106,9 @@ def analysis(request):
     w3=[]
     w4=[]
     w5=[]
+    tw=[]
 
-    queryset = Project_buffer.objects.order_by('-workers')
+    queryset = Project_buffer.objects.order_by('-container')
     for orders in queryset:
         labels.append(orders.container)
         data.append(orders.unload_time)
@@ -116,7 +119,7 @@ def analysis(request):
         w3.append(orders.w3)
         w4.append(orders.w4)
         w5.append(orders.w5)
-
+        tw.append(orders.tw)
 
     return render(request, 'analysis.html', {
         'labels': labels,
@@ -128,6 +131,7 @@ def analysis(request):
         'w3':w3,
         'w4':w4,
         'w5':w5,
+        'tw':tw,
     })
 
 
@@ -154,13 +158,14 @@ def chk_work(ids,cont,total,w1,w2,w3,w4,w5):
     for i in range(len(ids)):
         x=(w1,w2,w3,w4,w5)
         workers=5-x.count(0)
-        w1x=(w1/total)
-        w2x=(w2/total)
-        w3x=(w3/total)
-        w4x=(w4/total)
-        w5x=(w5/total)
+        w1x=(w1/total)*total
+        w2x=(w2/total)*total
+        w3x=(w3/total)*total
+        w4x=(w4/total)*total
+        w5x=(w5/total)*total
+        tw=w1x+w2x+w3x+w4x+w5x
 
-    return (ids,cont,total,workers,w1x,w2x,w3x,w4x,w5x )
+    return (ids,cont,total,workers,w1x,w2x,w3x,w4x,w5x,tw)
 
 
 
@@ -194,6 +199,7 @@ def summary(request):
         pt.w3=fin[6]
         pt.w4=fin[7]
         pt.w5=fin[8]
+        pt.tw=fin[9]
         pt.save()
        #print(orders.order_id+"  "+str(x))
        # print(fin)
@@ -289,6 +295,7 @@ def csv_database_write(request):
     orderids=[]
     w1=[]
     w2=[]
+    fin=[]
     # Get all data from UserDetail Databse Table
     users = Project.objects.all()
 
@@ -296,7 +303,7 @@ def csv_database_write(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="csv_database_write.csv"'
     writer = csv.writer(response)
-    writer.writerow(['timestamp', 'order-id', 'container_id',  'container_size', 'packages', 'sku', 'unload_time(m)'])
+    writer.writerow(['timestamp', 'order-id', 'container_id',  'container_size', 'packages', 'sku', 'unload_time(m)', 'Workers', 'Man hours (mins.)'])
 
     for user in users:
         orderids.append(user.order_id)
@@ -305,10 +312,16 @@ def csv_database_write(request):
         FMT = '%H:%M'
         tdelta = datetime.strptime(s2, FMT) - datetime.strptime(s1, FMT)
         unload_time_order= tdelta.total_seconds()/60
+        w1=tim_diff(user.w1_start, user.w1_stop)
+        w2=tim_diff(user.w2_start, user.w2_stop)
+        w3=tim_diff(user.w3_start, user.w3_stop)
+        w4=tim_diff(user.w4_start, user.w4_stop)
+        w5=tim_diff(user.w5_start, user.w5_stop)
+        fin=chk_work(user.order_id,user.container,unload_time_order,w1,w2,w3,w4,w5)
         #w1= (datetime.strptime(user.w1_stop, FMT) - datetime.strptime(user.w1_start, FMT)).total_seconds()/60
         #w2= (datetime.strptime(user.w2_stop, FMT) - datetime.strptime(user.w2_start, FMT)).total_seconds()/60
         #print(unload_time_order)
-        writer.writerow([user.timestamp, user.order_id, user.container, user.size, user.packages, user.sku, unload_time_order])
+        writer.writerow([user.timestamp, user.order_id, user.container, user.size, user.packages, user.sku, unload_time_order, fin[3], fin[9]])
     return response
 
 

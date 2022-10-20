@@ -30,6 +30,7 @@
       <th>Container</th>
       <th>Workers</th>
       <th>Unload time (m)</th>
+      <th>Man hours (m)</th>
   </tr>
 
 {% for buff in buffer %}
@@ -39,7 +40,8 @@
     <td>{{buff.order_id}}</td>
     <td>{{buff.container}}</td>
     <td>{{buff.workers}}</td>
-    <td>{{buff.unload_time}}</td>    
+    <td>{{buff.unload_time}}</td>
+    <td>{{buff.tw}}</td>    
 </tr>
 
 {%endfor%}

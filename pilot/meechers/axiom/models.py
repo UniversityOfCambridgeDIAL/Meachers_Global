@@ -66,3 +66,4 @@ class Project_buffer(models.Model):
         w3=models.TextField()
         w4=models.TextField()
         w5=models.TextField()
+        tw=models.TextField()

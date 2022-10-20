@@ -61,10 +61,7 @@
 {% block page_content %}
     <h1>Meachers Global</h1>
     <h3>Container Unloading Details for Order ID: {{project.order_id}}</h3>
-    
-
-    <hr>
-    
+    <div>
     <table>
     <tr>
         <th>Order ID: </th>
@@ -102,7 +99,7 @@
         <th>Start Time: </th>
         <td>{{project.time_in}}</td>
         <br/>
-        <th>Finish Time: </th>
+         <th>Finish Time: </th>
         <td>{{project.time_out}}</td>
         <br/>
         <th>Time taken: </th>
@@ -113,8 +110,11 @@
 
         
     <tr>
-        <th>Total workers engaged:</th>
+        <th>Total workers engaed:</th>
         <td>{{men}}</td>
+        <br/>
+        <th>Man Hours (m):</th>
+        <td>{{tw}}</td>
     </tr>
         
         
@@ -145,7 +145,7 @@
         <td>{{project.w3_start}}</td>
         <br/>
         <th>Finish: </th>
-        <td>{{project.w3_stop}}</td>ge
+        <td>{{project.w3_stop}}</td>
         <br/>
         <th>Duration: </th>
         <td>{{w3_t}}</td>
@@ -173,11 +173,8 @@
         <td>{{w5_t}}</td>
     </tr>
         
-        
-   
-    
     </table>
-    
+    </div>
 
 {% endblock %}
 
